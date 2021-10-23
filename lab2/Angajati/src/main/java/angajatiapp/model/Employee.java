@@ -11,7 +11,6 @@ public class Employee {
 	private static final int CNP_INDEX = 2;
 	private static final int DIDACTIC_FUNCTION_INDEX = 3;
 	private static final int SALARY_INDEX = 4;
-	private static final int ID_INDEX = 5;
 	private int id;
 	private String nume;/** The last name of the employee */
 	private String firstName; /** The first name of the employee */
