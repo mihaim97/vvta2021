@@ -11,6 +11,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -25,6 +26,22 @@ class EmployeeMockTest {
         employeeMock = new EmployeeMock();
     }
 
+    @Test
+    void modifyEmployeeFunctionTest2() {
+        employeeMock.setEmployeeList(employeeListAsStreamExpectedTrue2().collect(Collectors.toList()));
+       // employeeMock.modifyEmployeeFunction(employeeMock.getEmployeeList().get(0), DidacticFunction.LECTURER);
+        employeeMock.modifyEmployeeFunction(null, DidacticFunction.LECTURER);
+        assertEquals(DidacticFunction.ASISTENT, employeeMock.getEmployeeList().get(0).getFunction());
+    }
+
+    @Test
+    void modifyEmployeeFunctionTest() {
+        employeeMock.setEmployeeList(employeeListAsStreamExpectedTrue2().collect(Collectors.toList()));
+        employeeMock.modifyEmployeeFunction(employeeMock.getEmployeeList().get(0), DidacticFunction.LECTURER);
+        assertEquals(DidacticFunction.LECTURER, employeeMock.getEmployeeList().get(0).getFunction());
+    }
+
+
     @ParameterizedTest
     @MethodSource("employeeListAsStreamExpectedTrue")
     void addEmployeeExpectedTrue(Employee employee) {
@@ -37,16 +54,46 @@ class EmployeeMockTest {
         assertEquals(false, employeeMock.addEmployee(employee));
     }
 
+    public static Stream<Employee> employeeListAsStream() {
+        List<Employee> employeeList = new ArrayList<>();
+        Employee emp1 = new Employee("Ana", "Iulia",
+                "1970437890857", DidacticFunction.ASISTENT, 1500.0);
+        emp1.setId(1);
+        employeeList.add(emp1);
+        employeeList.add(null);
+        return employeeList.stream();
+    }
+
+
     public static Stream<Employee> employeeListAsStreamExpectedTrue() {
         List<Employee> employeeList = new ArrayList<>();
-        Employee emp1 = new Employee("Ana", "Iulia", "1970437890857",
-                DidacticFunction.ASISTENT, 1500.0);
+        Employee emp1 = new Employee("Ana", "Iulia",
+                "1970437890857", DidacticFunction.ASISTENT, 1500.0);
         Employee emp2 = new Employee("Ana", "Iulia", "1970437890857",
                 DidacticFunction.ASISTENT, 1.0);
         Employee emp3 = new Employee("Ana", "Iulia", "1970437890857",
                 DidacticFunction.ASISTENT, 2.0);
         Employee emp4 = new Employee("Ana", "Iulia", "1970437890857",
                 DidacticFunction.ASISTENT, 2500.0);
+        emp1.setId(1);
+        employeeList.add(emp1);
+        employeeList.add(emp2);
+        employeeList.add(emp3);
+        employeeList.add(emp4);
+        return employeeList.stream();
+    }
+
+    public static Stream<Employee> employeeListAsStreamExpectedTrue2() {
+        List<Employee> employeeList = new ArrayList<>();
+        Employee emp1 = new Employee("Ana", "Iulia",
+                "1970437890857", DidacticFunction.ASISTENT, 1500.0);
+        Employee emp2 = new Employee("Ana", "Iulia", "1970437890857",
+                DidacticFunction.ASISTENT, 1.0);
+        Employee emp3 = new Employee("Ana", "Iulia", "1970437890857",
+                DidacticFunction.ASISTENT, 2.0);
+        Employee emp4 = new Employee("Ana", "Iulia", "1970437890857",
+                DidacticFunction.ASISTENT, 2500.0);
+        emp1.setId(1);
         employeeList.add(emp1);
         employeeList.add(emp2);
         employeeList.add(emp3);
@@ -76,4 +123,5 @@ class EmployeeMockTest {
         employeeList.add(emp4);
         return employeeList.stream();
     }
+
 }

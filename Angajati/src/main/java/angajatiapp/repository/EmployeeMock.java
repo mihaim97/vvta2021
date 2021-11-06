@@ -22,7 +22,7 @@ public class EmployeeMock implements EmployeeRepositoryInterface {
 		Employee Mihaela = new Employee("Dodel", "Pacuraru", "1234567890876", DidacticFunction.ASISTENT, 2500d);
 		Employee Vasile = new Employee("Dorel", "Georgescu", "1234567890876", DidacticFunction.TEACHER, 2500d);
 		Employee Marin   = new Employee("Larson", "Puscas", "1234567890876", DidacticFunction.TEACHER,  2500d);
-		
+
 		employeeList.add(Ionel);
 		employeeList.add(Mihai);
 		employeeList.add(Ionela);
@@ -53,12 +53,12 @@ public class EmployeeMock implements EmployeeRepositoryInterface {
 	 */
 	@Override
 	public void modifyEmployeeFunction(Employee employee, DidacticFunction newFunction) {
-
 		if (employee!=null) {
 			int i = 0;
 			while (i < employeeList.size()) {
-				if (employeeList.get(i).getId() == employee.getId())
+				if (employeeList.get(i).getId() == employee.getId()){
 					employeeList.get(i).setFunction(newFunction);
+				}
 				i++;
 			}
 		}
@@ -81,4 +81,15 @@ public class EmployeeMock implements EmployeeRepositoryInterface {
 		return null;
 	}
 
+	public void setEmployeeList(List<Employee> employeeList) {
+		this.employeeList = employeeList;
+	}
+
+	public EmployeeValidator getEmployeeValidator() {
+		return employeeValidator;
+	}
+
+	public void setEmployeeValidator(EmployeeValidator employeeValidator) {
+		this.employeeValidator = employeeValidator;
+	}
 }
